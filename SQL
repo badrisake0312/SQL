@@ -1,0 +1,46 @@
+General Select Statement
+------------------------
+select * from table_name;
+select colum_name_1,colum_name_2 from table_name;
+select distinct colum_name_1,colum_name_2 from table_name;
+select * from table_name where colum_name='value'(condition);
+select * from table_name where colum-name in ('value_1','value_2');
+-----------------------------------------------------------------------
+SQL AND | OR Operator 
+--------------------
+-AND Results displayed if all conditions are evaluated to TRUE
+-Use 'AND' or '&&'
+-OR Results displayed if any of the condition is evaluated to TRUE
+-Use 'OR' or '||'
+
+select * from table_name where (colum_name_1='value' AND colum_name_2='value');
+
+select * from table_name where (colum_name_1='error_value' OR column_name_2='correct_value');
+-------------------------------------------------------------------------------------------------
+SQL IN and NOT IN Operator
+-------------------------
+select * from table_name where colum-name in ('value_1','value_2');
+select * from table_name where colum-name not in ('value_1','value_2');
+---------------------------------------------------------------------------------------------------
+SQL EXISTS and NOT EXISTS Operator
+----------------------------------
+-EXISTS Operator is used to test the existence of any record in subquery
+-With EXISTS condition we use subqurey
+-If the subquery returns TRUE the main query is evaluated
+
+select * from table_name_1 where exists (select * from table_name_2 where colum_name='value');
+select * from table-name_1 where not exists (select * from table_name_2 where colum_name='value');
+-------------------------------------------------------------------------------------------------------------
+SQL Comparison Operators
+-------------------------
+= equal to
+> greater than
+< less than
+>= greter than or equal to
+<= less than or equal to
+<> not equal to (!=)
+
+select * from table_name where colum_name=3000;
+select * from table_name where colum_name>3000;
+------------------------------------------------------------------------------------------------------------------
+
