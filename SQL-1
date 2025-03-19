@@ -1,0 +1,200 @@
+Pass-Badri$01 
+
+mysql> show databases; ---> Show all databases SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+ mysql> CREATE DATABASE employee;-------> Create new databases CREATE DATABASE <database_name>;
+ mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+mysql> USE employee;------------> To Select/Use database USE <database_name>;
+Database changed
+mysql> CREATE TABLE personal_info(
+       id INT NOT NULL PRIMARY KEY,
+       name VARCHAR(50) NOT NULL,
+       age INT);  -----------------> Create new table in database
+mysql> DESCRIBE personal_info; -------> Get structure of table DESCRIBE <table_name>;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(50) | NO   |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+mysql> SHOW TABLES; ----------> To display tables  SHOW TABLES;
+mysql> DROP TABLE personal_info;-----> Delete table DROP TABLE <table_name>;
+mysql> DROP DATABASE employee;--------> Delete database DROP DATABASE <database_name>;
+
+CREATE DATABASE rcvonlineshop;
+
+USE rcvonlineshop;
+
+CREATE TABLE customer(
+       cust_id VARCHAR(6) NOT NULL PRIMARY KEY,
+       cust_name VARCHAR(40) NOT NULL,
+       street VARCHAR(225),
+       city VARCHAR(50),
+       country VARCHAR(20) NOT NULL,
+       zip_code VARCHAR(8),
+       phone VARCHAR(20),
+       email VARCHAR(50)
+       );
+
+select * from customer;
+
+Insert Data into table
+Method-1-(Values that are u passing should match the no.of columns that are there)
+Syntax : INSERT INTO <tablename> VALUES('value1','value2',value3',value4','value5''value6','value7','value8'........);
+         INSERT INTO customer VALUES('A00001','Ram Krishna','London','London','UK','26758','786787659','r@rcvacademy');
+Method-2-(If you want to insert the values you can specify the columns where you want to insert the value)
+Syntax : INSERT INTO <tablename>(column1,column2,column3,column4,.....) VALUES ('value1','value2','value3','value4',.....);
+         INSERT INTO customer(cust_id,cust_name,street,city,country,zip_code,phone,email) VALUES
+         ('A00003','Ail K','Sydeny St','New York','USA','56236','456123345','alik@gamil.com');
+         INSERT INTO customer(cust_id,cust_name,street,city,country,zip_code,phone,email) VALUES
+         ('A00003','Ail K','Sydeny St','New York','USA','56236','456123345','alik@gamil.com'),
+         ('A00004','Badri','ATP','AP','INDIA','56289','453456654','badri@gamil.com'),
+         ('A00005','Manju','DMM','TN','FINLAND','56256','4561875123','manju@gamil.com'),
+         ('A00006','Ganga','KDR','KL','SINGAPOR','56246','456342675','ganga@gamil.com');
+
+SELECT Statement in SQL
+-> Used to retrieve data from database tables
+-> General select statement 
+   SELECT * FROM tablename;
+   SELECT columname1,columname2 FROM tablename;
+-> SELECT DISTINCT
+   SELECT DISTINCT col_name1,col_name2 FROM table_name;
+-> SQL WHERE Clause
+   SELECT * FROM table_name WHERE condition;
+SQL AND Operator
+-> Used to add multiple conditions
+-> Results displayed if all conditions are evaluated to TRUE
+-> Use 'AND' or '&&'
+   SELECT * FROM employee WHERE(city='London' AND zip_code=26758);
+   SELECT * FROM employee WHERE(city='London' && zip_code=26758);
+   SELECT * FROM customer WHERE(city='AP' && zip_code=56289);
+SQL OR Operator
+-> Used to add multiple conditions
+-> Results displayed if any of the condition is evaluated to TRUE
+-> Use 'OR' or '||'
+   SELECT * FROM employee WHERE (city='London' OR zip_code=26758);
+   SELECT * FROM employee WHERE (city='London' || zip_code=26785);
+SQL IN and NOT IN Operator
+-> Used to specify multiple values in WHERE clause
+-> Shorthand of multiple OR conditions
+   SELECT * FROM employee WHERE(city='London' OR city='New York');
+   SELECT * FROM employee WHERE city IN('London','New York');
+-> NOT IN is opposite of IN
+   SELECT * FROM employee WHERE city NOT IN('London','New York');
+-> The above query will return result rows where city in NOT London or New York
+SQL EXISTS and NOT EXISTS Operator
+-> EXISTS operator is used to test the existence of any record in subquery
+-> With EXISTS condition we use subquery
+-> If the subquery returns TRUE the main query is evaluated
+-> Sample Query
+   SELECT * FROM customer WHERE EXISTS(SELECT * FROM orders WHERE customer.cust_id=orders.cust_id);
+-> NOT EXISTS is opposite of EXISTS
+   SELECT * FROM customer WHERE NOT EXISTS(SELECT * FROM orders WHERE customer.cust_id=orders.cust_id);
+SQL Comparison Operators
+   =  Equal to
+   >  Greater than
+   <  Less than
+   >= Greater than or equal to
+   <= Less than or equal to
+   <> or != Not equal to
+   SELECT * FROM customer WHERE zip_code=26758;
+   SELECT * FROM customer WHERE zip_code>26758;
+   SELECT * FROM customer WHERE zip_code<26758;
+   SELECT * FROM customer WHERE zip_code>=26758;
+   SELECT * FROM customer WHERE zip_code<=26758;
+   SELECT * FROM customer WHERE zip_code<>26758;
+   SELECT * FROM employee WHERE city='London' OR zip_code = 8765;
+   A00001	Ram Krishna	London	London	UK	26758	786787659	r@rcvacademy
+   A00005	Manju	        DMM	TN	FINLAND	56256	4561875123	manju@gamil.com
+SQL BETWEEN Operator
+-> The BETWEEN Operator is used to select values within given range. These values could be numbers, text or dates
+-> The BETWEEN Operator includes beginning and end values
+Example:
+   SELECT * FROM employee WHERE empid BETWEEN 4 AND 20; (Lower AND HIGHER)
+   SELECT * FROM employee WHERE empid BETWEEN 'A00002' AND 'A00004';
+SQL NOT BETWEEN Operator
+   SELECT * FROM employee WHERE empid NOT BETWEEN 4 AND 20;(Remaining data will display)
+SQL LIKE Operator
+-> The LIKE Operator is used with WHERE clause to search for a specific pattern in a string
+-> The string pattern contains wildcard characters which represent missing characters
+-> Wildcards (%) and (_) are often used in conjunction with LIKE operator
+   -> The percent sign (%) represents zero, one, or multiple characters
+   -> The underscore sign (_) represent single character
+Example:
+   SELECT * FROM customer WHERE cust_name LIKE'a%';
+   A00003	Ail K	Sydeny St	New York	USA	56236	456123345	alik@gamil.com
+   SELECT * FROM customer WHERE cust_name LIKE'a_';
+   
+   SELECT * FROM customer WHERE cust_name LIKE'a____';_ if we add _ then characters are increase
+   A00003	Ail K	Sydeny St	New York	USA	56236	456123345	alik@gamil.com
+   SELECT * FROM customer WHERE cust_name LIKE'a%k';-It will fetch first A and last k cust_name 
+   A00003	Ail K	Sydeny St	New York	USA	56236	456123345	alik@gamil.com
+   SELECT * FROM customer WHERE cust_name LIKE'%i';- It will fetch last letter i cust_name  
+   A00004	Badri	ATP	AP	INDIA	56289	453456654	badri@gamil.com
+   SELECT * FROM customer WHERE cust_name LIKE'__n%';- It will fetch 
+   A00005	Manju	DMM	TN	FINLAND	        56256	4561875123	manju@gamil.com
+   A00006	Ganga	KDR	KL	SINGAPOR	56246	456342675	ganga@gamil.com
+SQL IS NULL and IS NOT NULL
+-> A field in SQL tables can have NULL or no value if they are defined as optional
+-> If the field is defined as optional then while inserting/updating a new record it is possible to add data without any value to this field as its defined as optional
+Example:
+   SELECT * FROM customer WHERE city IS NULL;
+   SELECT * FROM customer WHERE city IS NOT NULL;
+SQL Arithmetic Operators
+  + Addition
+  - Subtraction
+  * Multiplication
+  / Division
+  % Modulus
+Example :
+  SELECT purchase_amount, purchase_amount+1000 FROM orders;
+  SELECT purchase_amount, purchase_amount+1000 AS final_amount FROM orders;
+SQL GROUP BY Clause
+-> SQL GROUP BY clause systematically groups the table rows that have same values
+-> can group result set by one or more columns
+-> Often used by aggregate functions like COUNT(),MAX(),MIN(),AVG(),SUM()
+Example:
+   SELECT country, COUNT(*) FROM customer GROUP BY country;
+   SELECT country, COUNT(*) AS Number_of_customers FROM customer GROUP BY country;
+SQL HAVING Clause
+-> SQL HAVING clause is often used with GROUP BY clause to filter groups based on specific conditions.
+-> HAVING was introduced in SQL because WHERE cannot be used with aggregate functions
+Example:
+   SELECT country,COUNT(country) FROM customer GROUP BY country HAVING COUNT(country)>=2;
+SQL ORDER BY Clause
+-> SQL ORDER BY clause is used to sort the result set in ascending or descending order
+-> By default ORDER BY sorts data in ascending order
+Example:
+   SELECT * FROM customer ORDER BY cust_name DESC;
+   SELECT * FROM customer ORDER BY cust_name ASC;
+							
+							
+
+							
+
+
+
+
+
+
+
+
+
+
