@@ -17,6 +17,7 @@ select * from table_name where (colum_name_1='value' AND colum_name_2='value');
 
 select * from table_name where (colum_name_1='error_value' OR column_name_2='correct_value');
 -------------------------------------------------------------------------------------------------
+
 SQL IN and NOT IN Operator
 -------------------------
 select * from table_name where colum-name in ('value_1','value_2');
@@ -43,4 +44,56 @@ SQL Comparison Operators
 select * from table_name where colum_name=3000;
 select * from table_name where colum_name>3000;
 ------------------------------------------------------------------------------------------------------------------
+BETWEEN & NOT BETWEEN
+----------------------
+-The Between operator is used to select values within given range. these values could be numbers, text or dates.
+-The Between operator includes begin and end values
+
+select * from table_name where column_name between 4 and 20;
+
+NOT BETWEEN : Exact opposite.
+--------------------------------------------------------------------------------------------------------------------
+ORDER BY
+--------------
+-Order by clause is used to sort the result set in ascending or descending order.
+-By default ORDER BY sort data in ascending order.
+
+select * from table_name ORDER BY column_name DESC;
+select * from table_name ORDER BY column_name ASC;
+----------------------------------------------------------------------------------------------------------------------
+LIMIT or TOP
+---------------
+-lIMIT ot TOP clause is used to specify the number of records to return in result set.
+-Very useful if there is large set of data to be fetched from tables.
+
+select TOP 5 from table_name;
+select * from table_name LIMIT 5;
+select * from table_name FETCH FIRST 3 ROWS ONLY;
+-----------------------------------------------------------------------------------------------------------------------
+JOIN / INNER JOIN
+-------------------
+select * from table_name_1 JOIN table_name_2 ON table_name_1.colum_name=table_name_2.colum_name;
+select * from table_name_1 A JOIN table_name_2 B ON A.column_name = B.colum_name;
+select A.colum_name_1,B.colum_name1,A.colum_name_2,B.colum_name_2 from table_name_1 A JOIN table_name_2 B ON A.common_colum_name=B.common_colum_name;
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+LEFT JOIN / LEFT OUTER JOIN
+----------------------------
+select * from table_name_1 LEFT JOIN table_name_2 ON table_name_1.colum_name=table_name_2.colum_name;
+- It will display all the data what ever in the left side table along with the common data.
+-----------------------------------------------------------------------------------------------------------
+RIGHT JOIN / RIGHT OUT JOIN
+----------------------------
+select * from table_name_1 RIGHT JOIN table_name_2 ON table_name_1.colum_name=table_name_2.colum_name;
+- It will display all the data what ever in the right side table along with the common data.
+-----------------------------------------------------------------------------------------------------------
+FULL JOIN / FULL OUTER JOIN
+----------------------------
+-My Sql doesn't support FULL JOIN 
+-We can get FULL JOIN result using UNION keyword
+
+select * from table_name_1 A LEFT JOIN table_name_2 B ON A.common_colum_name = B.common_colum_name
+UNION
+select * from table_name_1 A RIGHT JOIN table_name_2 B ON A.common_colum_name = B.common_colum_name
+--------------------------------------------------------------------------------------------------------------
+
 
